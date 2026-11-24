@@ -1,2 +1,8 @@
 # 插件打包脚本由 sh 执行，在 Windows 检出时也要保留 LF。
 plugin-packages/*.sh text eol=lf
+
+# 二开：锁文件冲突一律取上游后重新生成，禁止逐行自动合并。
+#   git checkout --theirs web/bun.lock && (cd web && bun install)
+#   git checkout --theirs backend/go.sum && (cd backend && go mod tidy)
+web/bun.lock        -merge
+backend/go.sum      -merge

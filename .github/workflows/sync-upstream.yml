@@ -1,0 +1,76 @@
+name: Sync upstream main
+
+# main 只做「上游镜像」：本工作流每天把 WMRBYY/MeiYe-commerce-short-drama-Agent
+# 的 main 快进到本仓库 main，二开代码永远不放在 main 上，因此这里只做 --ff-only。
+#
+# ⚠️ GitHub 的 schedule 只在仓库「默认分支」上触发。
+#    本仓库默认分支需要设为 dev（Settings → General → Default branch），
+#    这样定时任务从 dev 读取本文件，而 main 保持纯净。
+
+on:
+  schedule:
+    - cron: "0 19 * * *" # UTC 19:00 = 北京时间 03:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/WMRBYY/MeiYe-commerce-short-drama-Agent.git
+          git fetch upstream --tags --prune
+
+      - name: Fast-forward main
+        id: ff
+        run: |
+          before=$(git rev-parse HEAD)
+          if ! git merge --ff-only upstream/main; then
+            echo "::error::main 与上游已分叉，无法快进。请确认 main 上没有二开提交（main 只做上游镜像）。"
+            exit 1
+          fi
+          after=$(git rev-parse HEAD)
+          {
+            echo "before=$before"
+            echo "after=$after"
+          } >> "$GITHUB_OUTPUT"
+          if [ "$before" = "$after" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push main
+        if: steps.ff.outputs.changed == 'true'
+        run: git push origin main
+
+      - name: Summary
+        run: |
+          if [ "${{ steps.ff.outputs.changed }}" = "true" ]; then
+            {
+              echo "### main 已快进到上游最新"
+              echo ""
+              echo '```'
+              git log --oneline "${{ steps.ff.outputs.before }}..${{ steps.ff.outputs.after }}"
+              echo '```'
+              echo ""
+              echo "本地跟进：\`git fetch origin && git checkout dev && git rebase origin/main\`"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "main 已是最新，本次无需同步。" >> "$GITHUB_STEP_SUMMARY"
+          fi
