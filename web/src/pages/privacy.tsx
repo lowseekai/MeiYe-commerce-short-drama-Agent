@@ -9,9 +9,9 @@ export default function PrivacyPage() {
             <article className="mx-auto max-w-3xl rounded-2xl bg-white px-6 py-9 shadow-sm ring-1 ring-slate-200 sm:px-12 sm:py-12">
                 <Link to="/" className="text-sm text-blue-700 hover:underline">返回首页</Link>
                 <h1 className="mt-7 text-3xl font-semibold tracking-tight">隐私说明</h1>
-                <p className="mt-4 leading-7 text-slate-600">运营主体：梅野工作台的实际部署与运营方。各部署方应按自己的业务信息更新本页。</p>
+                <p className="mt-4 leading-7 text-slate-600">运营主体：造幕工作台的实际部署与运营方。各部署方应按自己的业务信息更新本页。</p>
                 <p className="leading-7 text-slate-600">联系邮箱：<a className="text-blue-700 hover:underline" href={`mailto:${contact}`}>{contact}</a></p>
-                <p className="mt-8 leading-7">本说明介绍梅野工作台可处理的信息类型。具体的服务主体、信息流向、保存期限和删除流程，以当前站点运营者发布的说明为准。</p>
+                <p className="mt-8 leading-7">本说明介绍造幕工作台可处理的信息类型。具体的服务主体、信息流向、保存期限和删除流程，以当前站点运营者发布的说明为准。</p>
 
                 <Section title="我们处理哪些信息、用于什么目的">
                     <p>管理员账号使用用户名、密码摘要和登录会话信息，用于身份验证、维持登录状态及权限控制。系统保存用户创建的画布、作品、上传资源、任务记录及相关配置，以提供创作、保存、恢复和管理功能。用户主动创建分享链接时，系统按分享设置提供对应内容的访问。</p>

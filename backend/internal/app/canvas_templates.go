@@ -31,7 +31,7 @@ const (
 	canvasTemplatePendingMax     = 5
 	canvasTemplateReviewNoteMax  = 300
 	canvasTemplateReportMax      = 300
-	canvasTemplateDefaultAuthor  = "MeiyeAI 创作者"
+	canvasTemplateDefaultAuthor  = "造幕 创作者"
 )
 
 type CanvasTemplateSubmitRequest struct {

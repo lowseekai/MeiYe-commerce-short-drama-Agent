@@ -770,9 +770,9 @@ export type CreationBatchActions = {
     onUseAsReference: (storageKey: string, url: string) => void;
 };
 
-/** 悬浮下载按钮时的说明卡：MeiyeAI 原图不加平台水印。 */
+/** 悬浮下载按钮时的说明卡：造幕 原图不加平台水印。 */
 function CreationDownloadHoverCard({ children, onDownload }: { children: ReactNode; onDownload: () => void }) {
-    const brandName = useAppearanceStore((state) => state.appearance.brandName) || "MeiyeAI";
+    const brandName = useAppearanceStore((state) => state.appearance.brandName) || "造幕";
     const { t } = useTranslation();
     return (
         <Popover
@@ -788,7 +788,7 @@ function CreationDownloadHoverCard({ children, onDownload }: { children: ReactNo
                         <i />
                         <i />
                         <span className="creation-download-card-brand">
-                            <img src="/meiyeai-logo.png" alt="" />
+                            <img src="/zaomu-logo.png" alt="" />
                             {brandName}
                         </span>
                     </div>

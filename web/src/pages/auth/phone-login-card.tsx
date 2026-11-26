@@ -199,7 +199,7 @@ export function PhoneLoginCard({ next: nextPath, onSuccess }: PhoneLoginCardProp
         : settings.phoneRegistrationEnabled ? "未注册的手机号将自动创建账号。" : "仅支持已注册手机号登录。";
     const wechatStatus = !settings ? "正在加载微信登录方式" : !wechatReady ? "微信登录暂不可用。"
         : settings.wechatRegistrationEnabled ? "使用微信扫码登录，首次使用将创建账号。" : "使用微信扫码登录已绑定账号。";
-    const agreementTitle = settings?.agreementTitle?.trim() || "MeiyeAI 用户服务协议";
+    const agreementTitle = settings?.agreementTitle?.trim() || "造幕 用户服务协议";
     const agreementContent = settings?.agreementContent?.trim();
     const agreementParagraphs = agreementContent ? agreementContent.split(/\n\s*\n/) : DEFAULT_LOGIN_TERMS;
 
@@ -270,7 +270,7 @@ export function PhoneLoginCard({ next: nextPath, onSuccess }: PhoneLoginCardProp
                 open={policyOpen !== null} onCancel={() => setPolicyOpen(null)} footer={null} centered width={560}>
                 <div className="phone-auth-policy-content">
                     {policyOpen === "ai" ? <>
-                        <p>MeiyeAI 提供电商 Agent、画布助手以及图片、视频等 AI 创作功能。不同模型和功能的能力、使用限制及积分消耗，以创作时页面展示的信息为准。</p>
+                        <p>造幕 提供电商 Agent、画布助手以及图片、视频等 AI 创作功能。不同模型和功能的能力、使用限制及积分消耗，以创作时页面展示的信息为准。</p>
                         <p>请仅上传、使用您拥有合法权利或已获得授权的文字、图片、音视频和其他素材，避免提交不必要的个人隐私或敏感信息。</p>
                         <p>AI 生成内容可能存在不准确、不完整或与预期不一致的情况。发布、商用或用于重要决策前，请自行检查内容、事实和相关权利。</p>
                         <p>请遵守平台规则及适用法律，不得使用相关功能制作违法、侵权、欺诈或其他有害内容。对外发布生成内容时，请按适用要求进行 AI 内容标识。</p>

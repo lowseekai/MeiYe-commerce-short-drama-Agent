@@ -166,7 +166,7 @@ export function ShopCanvasAssistant({ scope, config }: { scope: string; config: 
                 pinnedSkillIds: [],
                 model: modelOptionName(model) || undefined,
                 ...(logicalModelId ? { logicalModelId } : channel.channelId ? { channelId: channel.channelId, channelModelKey: modelOptionName(model) } : {}),
-                prompt: `你是 MeiyeAI 电商 Agent，专注商品主图、详情页、模特换装、多模特同款、一模多衣、三视图、姿势、换脸、印花提取、图像精修、商品视频复刻、视频脚本和剪辑。先识别任务与缺失素材，保持商品外观、材质、图案和规格事实一致。给出清晰可执行的方案和对应电商工具，不讨论影视短剧或通用技能。不能宣称已经生成、扣费或修改画布；用户在电商工具中选择模型、参数并确认后才提交。\n\n用户需求：${text}`,
+                prompt: `你是 造幕 电商 Agent，专注商品主图、详情页、模特换装、多模特同款、一模多衣、三视图、姿势、换脸、印花提取、图像精修、商品视频复刻、视频脚本和剪辑。先识别任务与缺失素材，保持商品外观、材质、图案和规格事实一致。给出清晰可执行的方案和对应电商工具，不讨论影视短剧或通用技能。不能宣称已经生成、扣费或修改画布；用户在电商工具中选择模型、参数并确认后才提交。\n\n用户需求：${text}`,
                 budget: { maxGenerationTasks: 0, maxVideoSeconds: 0 },
                 idempotencyKey: createClientUUID(),
             };

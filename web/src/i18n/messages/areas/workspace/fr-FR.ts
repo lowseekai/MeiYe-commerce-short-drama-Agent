@@ -169,7 +169,7 @@ export const frFR: DeepStringRecord<typeof zhCN> = {
         resize: "Faites glisser pour redimensionner la fenêtre de discussion",
         resizeHint: "Faites glisser pour redimensionner, double-cliquez pour rétablir",
         avatarAlt: "Avatar de 小夜",
-        tagline: "MeiyeAI · Guide de création",
+        tagline: "造幕 · Guide de création",
         status: "À vos côtés pour créer",
         close: "Fermer la discussion",
         greeting: "✦ Bonjour, créateur",

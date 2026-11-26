@@ -246,7 +246,7 @@ export function AudioSettingsPanel({ config, referenceAudioLabels, references = 
                 ) : null}
                 {evoLinkSeed ? (
                     <p className="text-xs leading-5" style={{ color: theme.node.muted }}>
-                        在画布连接参考音频，提示词写清要说的台词与语气。第 1 段参考音频在提示词中写作 @audio1；未写时梅野会自动补上。当前插件仅支持参考音频，不支持参考图片。
+                        在画布连接参考音频，提示词写清要说的台词与语气。第 1 段参考音频在提示词中写作 @audio1；未写时造幕会自动补上。当前插件仅支持参考音频，不支持参考图片。
                     </p>
                 ) : qwenAudio ? (
                     <label className="flex flex-col gap-2 text-xs" style={{ color: theme.node.muted }}>

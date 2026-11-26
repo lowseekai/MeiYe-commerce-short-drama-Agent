@@ -111,7 +111,7 @@ export function AuthScene() {
                                 theme={theme}
                                 className="size-7"
                                 alt=""
-                                fallback={<span className="size-7 bg-current" style={{ mask: "url(/meiyeai-logo.png) center / contain no-repeat", WebkitMask: "url(/meiyeai-logo.png) center / contain no-repeat" }} />}
+                                fallback={<span className="size-7 bg-current" style={{ mask: "url(/zaomu-logo.png) center / contain no-repeat", WebkitMask: "url(/zaomu-logo.png) center / contain no-repeat" }} />}
                             />
                             {appearance.brandName}
                         </Link>

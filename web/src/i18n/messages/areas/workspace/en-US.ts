@@ -169,7 +169,7 @@ export const enUS: DeepStringRecord<typeof zhCN> = {
         resize: "Drag to resize the chat window",
         resizeHint: "Drag to resize. Double-click to reset.",
         avatarAlt: "小夜 avatar",
-        tagline: "MeiyeAI · Creative guide",
+        tagline: "造幕 · Creative guide",
         status: "Creating with you",
         close: "Close chat",
         greeting: "✦ Hi, creator",

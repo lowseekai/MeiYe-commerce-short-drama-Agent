@@ -169,7 +169,7 @@ export const koKR: DeepStringRecord<typeof zhCN> = {
         resize: "드래그하여 채팅 창 크기 조정",
         resizeHint: "드래그하여 크기를 조정하고, 더블클릭하면 기본 크기로 돌아갑니다",
         avatarAlt: "小夜 아바타",
-        tagline: "MeiyeAI · 창작 가이드",
+        tagline: "造幕 · 창작 가이드",
         status: "창작을 함께하는 중",
         close: "대화 닫기",
         greeting: "✦ 안녕하세요, 크리에이터님",

@@ -1,7 +1,7 @@
 import type { ReactNode, SVGProps } from "react";
 
 /**
- * MeiyeAI 统一图标：24 栅格、1.6 描边、圆角端点；强调部分用 currentColor 低透明度填充（双色调），
+ * 造幕 统一图标：24 栅格、1.6 描边、圆角端点；强调部分用 currentColor 低透明度填充（双色调），
  * 不使用渐变，明暗主题下自动跟随文字颜色。
  */
 export type MeiyeIconProps = SVGProps<SVGSVGElement> & { size?: number | string };

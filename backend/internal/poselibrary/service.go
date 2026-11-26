@@ -1,7 +1,7 @@
 // Package poselibrary 维护站点级姿势参考图库。
 //
 // 数据边界：
-//   - 姿势元数据由管理员导入（ai-pose-gallery-zh 的 data/pose-zh.json，或梅野通用格式），
+//   - 姿势元数据由管理员导入（ai-pose-gallery-zh 的 data/pose-zh.json，或造幕通用格式），
 //     代码仓库和发布镜像不携带任何姿势图片。
 //   - 图片由管理员触发同步，从导入时填写的来源地址下载到数据目录 pose-library/<条目ID>/，
 //     之后浏览、预览和选用只读本站文件，不再访问来源站点。
@@ -24,7 +24,7 @@ const (
 	SourceAIPoseGalleryZH = "ai-pose-gallery-zh"
 	// SourceCustom 是管理员在后台逐张上传的自建姿势。
 	SourceCustom = "custom"
-	// PackFormat 是梅野通用姿势包格式标识，供以后接入其他姿势来源。
+	// PackFormat 是造幕通用姿势包格式标识，供以后接入其他姿势来源。
 	PackFormat = "yingce-pose-library"
 
 	// MaxImportBytes 是导入 JSON 的大小上限；ai-pose-gallery-zh 的 pose-zh.json 约 0.6 MB。

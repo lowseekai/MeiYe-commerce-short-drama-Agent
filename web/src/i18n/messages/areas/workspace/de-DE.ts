@@ -169,7 +169,7 @@ export const deDE: DeepStringRecord<typeof zhCN> = {
         resize: "Ziehen, um die Größe des Chatfensters zu ändern",
         resizeHint: "Zum Anpassen ziehen, Doppelklick stellt die Standardgröße wieder her",
         avatarAlt: "Avatar von 小夜",
-        tagline: "MeiyeAI · Kreativ-Guide",
+        tagline: "造幕 · Kreativ-Guide",
         status: "Begleitet dich beim Erstellen",
         close: "Chat schließen",
         greeting: "✦ Hallo, Creator",

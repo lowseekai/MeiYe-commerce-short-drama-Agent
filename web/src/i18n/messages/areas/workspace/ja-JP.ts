@@ -169,7 +169,7 @@ export const jaJP: DeepStringRecord<typeof zhCN> = {
         resize: "ドラッグしてチャットウィンドウのサイズを変更",
         resizeHint: "ドラッグでサイズ変更、ダブルクリックで既定のサイズに戻します",
         avatarAlt: "小夜のアバター",
-        tagline: "MeiyeAI · 創作ガイド",
+        tagline: "造幕 · 創作ガイド",
         status: "創作をサポート中",
         close: "チャットを閉じる",
         greeting: "✦ こんにちは、クリエイターさん",

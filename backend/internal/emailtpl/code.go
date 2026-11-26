@@ -13,7 +13,7 @@ type CodeEmail struct {
 	Heading string
 	// SubjectLabel 是标题里的验证码名称，如“密码重置验证码”；留空时为 Heading + “验证码”。
 	SubjectLabel string
-	// Intro 说明用途，如“你正在重置 梅野 账号密码，请在页面中输入以下验证码。”
+	// Intro 说明用途，如“你正在重置 造幕 账号密码，请在页面中输入以下验证码。”
 	Intro       string
 	Code        string
 	TTLMinutes  int

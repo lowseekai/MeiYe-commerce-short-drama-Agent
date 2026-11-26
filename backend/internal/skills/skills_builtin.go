@@ -284,7 +284,7 @@ func normalizeBuiltinSkillMetadata(skillID string, metadata builtinSkillMetadata
 		metadata.Owner = "yingce-system"
 	}
 	if metadata.Author == "" {
-		metadata.Author = "MeiyeAI"
+		metadata.Author = "造幕"
 	}
 	if metadata.Tag == "" {
 		metadata.Tag = "others"

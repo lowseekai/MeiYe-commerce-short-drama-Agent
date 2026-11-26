@@ -199,7 +199,7 @@ export default function CanvasGuidePage() {
 
     useEffect(() => {
         const previous = document.title;
-        document.title = "画布使用说明 · MeiyeAI";
+        document.title = "画布使用说明 · 造幕";
         return () => { document.title = previous; };
     }, []);
 
@@ -208,8 +208,8 @@ export default function CanvasGuidePage() {
             <div className="cg-aurora" aria-hidden />
             <header className="cg-header">
                 <Link to="/" className="cg-brand">
-                    <img src="/meiyeai-logo.png" alt="" />
-                    <span>MeiyeAI</span>
+                    <img src="/zaomu-logo.png" alt="" />
+                    <span>造幕</span>
                 </Link>
                 <span className="cg-header-sep" />
                 <span className="cg-header-title"><BookOpen />画布使用说明</span>
@@ -269,7 +269,7 @@ export default function CanvasGuidePage() {
                         <Table
                             head={["按钮", "用来做什么"]}
                             rows={[
-                                ["主页", "回到 MeiyeAI 首页。"],
+                                ["主页", "回到 造幕 首页。"],
                                 ["节点", "列出画布里的全部节点，可按名称、镜头、模型或标签搜索，点一下就跳到该节点。节点多了以后特别好用。"],
                                 ["素材库", "你上传和收藏的图片、视频、音频、文本。可按类型筛选，选中后插入画布。"],
                                 ["任务", "正在排队和运行的生成任务。生成慢的时候来这里看进度，也可以取消任务。"],

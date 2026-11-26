@@ -9,11 +9,11 @@ import { safeLoginNext } from "@/stores/use-login-dialog-store";
 import { LinuxDOIcon } from "./auth-scene";
 import { VerificationFields } from "@/components/auth/verification-fields";
 import { emptyVerification, loginVerification, methodLabels, verificationMethods, type VerificationMethod } from "@/services/api/verification";
-import { PhoneLoginCard } from "./phone-login-card";
+import { EmailLoginCard } from "./email-login-card";
 
 export default function LoginPage() {
     const [params] = useSearchParams();
-    return params.get("mode") === "admin" ? <AdminLoginPage /> : <PhoneLoginCard />;
+    return params.get("mode") === "admin" ? <AdminLoginPage /> : <EmailLoginCard />;
 }
 
 function AdminLoginPage() {

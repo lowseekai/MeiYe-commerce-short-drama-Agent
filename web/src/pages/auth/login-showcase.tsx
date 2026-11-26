@@ -56,7 +56,7 @@ export function LoginShowcase({ active }: { active: boolean }) {
     };
 
     return (
-        <section className="meiye-login-showcase" aria-label="MeiyeAI 创作能力展示" aria-roledescription="轮播">
+        <section className="meiye-login-showcase" aria-label="造幕 创作能力展示" aria-roledescription="轮播">
             {LOGIN_SLIDES.map((slide, itemIndex) => (
                 <div key={slide.id} className={`meiye-login-media${itemIndex === index ? " is-active" : ""}`} aria-hidden={itemIndex !== index}>
                     <img src={`/login-showcase/${slide.id}.webp`} alt={slide.alt} width="1024" height="1024" loading="eager" decoding="async" fetchPriority={itemIndex === 0 ? "high" : "auto"} onLoad={(event) => void prepareImage(event.currentTarget, itemIndex)} />

@@ -12,7 +12,7 @@ import (
 	"yingce/backend/internal/repository"
 )
 
-const DefaultBrandName = "MeiyeAI"
+const DefaultBrandName = "造幕"
 
 // Host 由组合根注入，避免 auth → service 回环。
 type Host interface {
