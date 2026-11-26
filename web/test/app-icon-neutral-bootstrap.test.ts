@@ -9,11 +9,11 @@ describe("app icon bootstrap", () => {
     const appearanceStore = readProjectFile("src/stores/use-appearance-store.ts");
 
     test("index.html declares the supplied MeiyeAI favicon", () => {
-        expect(indexHtml).toContain('<link rel="icon" type="image/png" href="/meiyeai-favicon.png" />');
+        expect(indexHtml).toContain('href="/zaomu-favicon-16.png"');
     });
 
     test("the appearance store replaces the favicon after loading the public appearance", () => {
         expect(appearanceStore).toContain('link[rel~="icon"]');
-        expect(appearanceStore).toContain('favicon.href = logoURL === DEFAULT_PUBLIC_APPEARANCE.logoUrl ? "/meiyeai-favicon.png" : logoURL');
+        expect(appearanceStore).toContain('favicon.href = "/zaomu-favicon.png";');
     });
 });

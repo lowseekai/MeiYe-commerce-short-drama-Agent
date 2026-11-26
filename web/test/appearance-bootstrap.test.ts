@@ -7,7 +7,7 @@ test("initial HTML shows the MeiyeAI brand until the public appearance is resolv
     const [html, mainSource] = await Promise.all([Bun.file(new URL("../index.html", import.meta.url)).text(), Bun.file(new URL("../src/main.tsx", import.meta.url)).text()]);
 
     expect(html).toContain("<title>MeiyeAI</title>");
-    expect(html).toContain('/meiyeai-favicon.png');
+    expect(html).toContain('/zaomu-favicon-16.png');
     expect(mainSource).toContain("bootstrapAppearance()");
     expect(mainSource).toContain('import("./application")');
     expect(mainSource.indexOf("bootstrapAppearance()")).toBeLessThan(mainSource.indexOf('import("./application")'));
@@ -46,7 +46,7 @@ test("appearance URLs reject executable and insecure remote schemes", () => {
         authVideoUrl: "http://example.com/brand.mp4",
     });
 
-    expect(appearance.logoUrl).toBe("/meiyeai-logo.png");
+    expect(appearance.logoUrl).toBe("/zaomu-logo.png");
     expect(appearance.authVideoUrl).not.toContain("example.com");
 });
 

@@ -12,22 +12,22 @@ export const DEFAULT_PUBLIC_APPEARANCE: PublicAppearance = {
     updates: DEFAULT_UPDATE_ANNOUNCEMENT,
     canvas: DEFAULT_CANVAS_APPEARANCE,
     schemaVersion: 10,
-    brandName: "MeiyeAI",
-    brandSlug: "meiyeai",
+    brandName: "造幕",
+    brandSlug: "zaomu",
     authHeroTitle: "让一个故事，\n从文字走向银幕。",
     authHeroDescription: "",
-    logoUrl: "/meiyeai-logo.png",
-    darkLogoUrl: "/meiyeai-logo.png",
+    logoUrl: "/zaomu-logo.png",
+    darkLogoUrl: "/zaomu-logo.png",
     logoFrameEnabled: true,
     authVideoUrl: "https://boss-shjd.biliapi.net/updream/aniforge/video/video_bbcb00bd-650d-4249-9346-5cd21fd2484c_m1hc-u0-1pu13x-3v1s.mp4",
     authVideoPosterUrl: "https://i0.hdslb.com/bfs/aitool/aniforge/image/02933f26-5f1b-49ff-a811-b7f95ee5e5b8_m1hc-u0-sau.jpg",
     authVideoAutoplay: true,
     skinId: "classic",
     activeSkin: DEFAULT_CLASSIC_SKIN,
-    seoTitle: "MeiyeAI",
-    seoDescription: "MeiyeAI，面向 AI 影视与短剧创作的工作台。",
+    seoTitle: "造幕",
+    seoDescription: "造幕，面向 AI 影视与短剧创作的工作台。",
     seoKeywords: "",
-    footerCopyright: `© ${new Date().getFullYear()} MeiyeAI. All rights reserved.`,
+    footerCopyright: `© ${new Date().getFullYear()} 造幕. All rights reserved.`,
     icpFilingEnabled: false,
     icpFilingNumber: "",
     redeemPurchaseUrl: "",
@@ -148,8 +148,9 @@ export function applyAppearanceMetadata(appearance: PublicAppearance, targetDocu
         favicon.rel = "icon";
         targetDocument.head.appendChild(favicon);
     }
-    const logoURL = appearanceLogoURL(appearance, targetDocument.documentElement.classList.contains("dark") ? "dark" : "light");
-    favicon.href = logoURL === DEFAULT_PUBLIC_APPEARANCE.logoUrl ? "/meiyeai-favicon.png" : logoURL;
+    // favicon 固定指向专供小尺寸的图标文件：把大尺寸 Logo 缩放成 16px 会发虚，
+    // 也会覆盖 index.html 里声明的多尺寸图标（16/32/64），导致标签页图标在启动后“变糊”。
+    favicon.href = "/zaomu-favicon.png";
 
     const location = targetDocument.defaultView?.location;
     if (location && (location.protocol === "http:" || location.protocol === "https:")) {
@@ -182,7 +183,7 @@ export function appearanceLogoURL(appearance: PublicAppearance, theme: "light" |
 }
 
 export function brandStudioLabel(appearance: PublicAppearance) {
-    if (appearance.brandName === DEFAULT_PUBLIC_APPEARANCE.brandName && appearance.brandSlug === DEFAULT_PUBLIC_APPEARANCE.brandSlug) return "MEIYEAI STUDIO";
+    if (appearance.brandName === DEFAULT_PUBLIC_APPEARANCE.brandName && appearance.brandSlug === DEFAULT_PUBLIC_APPEARANCE.brandSlug) return "ZAOMU STUDIO";
     return appearance.brandSlug.replace(/-+/g, " ").toLocaleUpperCase();
 }
 
