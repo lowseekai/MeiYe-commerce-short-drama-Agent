@@ -61,7 +61,7 @@ export function VerificationFields({
     const targetReady = (sms ? Boolean(value.phone.trim()) : true) && (email ? Boolean(value.email.trim()) : true) && (purpose !== "bind" || Boolean(password));
     const codeLabel = method === "sms_email" ? t("auth.verification.code") : sms ? t("auth.verification.smsCode") : t("auth.verification.emailCode");
     return (
-        <div className="auth-form-fields">
+        <div className="auth-form-fields flex flex-col gap-4">
             {/* 后端只接受中国大陆手机号，+86 是固定前缀，输入时可省略。 */}
             {sms && (
                 <Input
@@ -95,7 +95,7 @@ export function VerificationFields({
                     disabled={disabled || sending}
                 />
             )}
-            <div className="auth-code-row">
+            <div className="auth-code-row grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                 <Input
                     size="large"
                     // 双通道（sms_email）一次请求同时下发两种验证码，一个输入框同时填入两项。
@@ -111,7 +111,7 @@ export function VerificationFields({
                     placeholder={t("auth.verification.codePlaceholder")}
                     disabled={disabled || sending}
                 />
-                <Button className="auth-code-button" size="large" data-counting={counting ? "true" : "false"} loading={sending} disabled={disabled || sending || counting || !targetReady} onClick={() => void send()}>
+                <Button className="auth-code-button min-w-[120px] flex-none" size="large" data-counting={counting ? "true" : "false"} loading={sending} disabled={disabled || sending || counting || !targetReady} onClick={() => void send()}>
                     {counting ? t("auth.verification.resendIn", { seconds: remaining }) : t("auth.verification.send")}
                 </Button>
             </div>

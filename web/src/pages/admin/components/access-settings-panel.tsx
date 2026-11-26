@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useAppearanceStore } from "@/stores/use-appearance-store";
 import { getAdminLinuxDOSetting, getAdminRegistrationSetting, updateAdminLinuxDOSetting, updateAdminRegistrationSetting, type LinuxDOSetting, type RegistrationSetting } from "@/services/api/wallet";
 import type { AuthLoginMode } from "@/services/api/auth";
+import { getVerificationPolicy, saveVerificationPolicy, type VerificationPolicy } from "@/services/api/verification";
 import { useAuthSettingsStore } from "@/stores/use-auth-settings-store";
 import { AdminStatusBadge, configuredSecretText, SettingsSectionCard } from "./admin-ui";
 import { Select } from "@/components/ui/base/select";
@@ -54,6 +55,8 @@ export default function AccessSettingsPanel() {
     const [savingAgreement, setSavingAgreement] = useState(false);
     const [savingLoginMode, setSavingLoginMode] = useState(false);
     const [savingEmailPolicy, setSavingEmailPolicy] = useState<"" | "emailRequired" | "emailVerificationRequired">("");
+    const [policy, setPolicy] = useState<VerificationPolicy | null>(null);
+    const [savingEmailLogin, setSavingEmailLogin] = useState(false);
     const [dirty, setDirty] = useState(false);
     const [draftLinuxDOEnabled, setDraftLinuxDOEnabled] = useState(false);
     const [agreementTitle, setAgreementTitle] = useState("");
@@ -73,11 +76,12 @@ export default function AccessSettingsPanel() {
             else setRefreshing(true);
             setLoadError("");
             try {
-                const [linuxdoData, registrationData, wechatData] = await Promise.all([getAdminLinuxDOSetting(), getAdminRegistrationSetting(), getAdminWechatSetting()]);
+                const [linuxdoData, registrationData, wechatData, policyData] = await Promise.all([getAdminLinuxDOSetting(), getAdminRegistrationSetting(), getAdminWechatSetting(), getVerificationPolicy()]);
                 if (requestVersion !== requestVersionRef.current) return;
                 setLinuxdo(linuxdoData.setting);
                 setWechat(wechatData.setting);
                 setRegistration(registrationData.setting);
+                setPolicy(policyData);
                 setAgreementTitle(registrationData.setting.agreementTitle || "");
                 setAgreementContent(registrationData.setting.agreementContent || "");
                 setAgreementDirty(false);
@@ -247,6 +251,22 @@ export default function AccessSettingsPanel() {
             message.error(error instanceof Error ? error.message : "更新邮箱要求失败");
         } finally {
             setSavingEmailPolicy("");
+        }
+    };
+
+    // 「邮箱验证码登录」属于登录注册策略（auth_verification_policy），与注册开关分开保存。
+    const changeEmailLogin = async (value: boolean) => {
+        if (!policy || savingEmailLogin) return;
+        setSavingEmailLogin(true);
+        try {
+            const next = await saveVerificationPolicy({ ...policy, emailLogin: value });
+            setPolicy(next);
+            void useAuthSettingsStore.getState().load({ maxAgeMs: 0 });
+            message.success(value ? "已开放邮箱验证码登录" : "已关闭邮箱验证码登录");
+        } catch (error) {
+            message.error(error instanceof Error ? error.message : "更新邮箱登录策略失败");
+        } finally {
+            setSavingEmailLogin(false);
         }
     };
 
@@ -437,6 +457,25 @@ export default function AccessSettingsPanel() {
                             disabled={loading || refreshing || Boolean(savingEmailPolicy)}
                             onChange={(value) => void changeEmailPolicy("emailVerificationRequired", value)}
                             aria-label="注册必须通过验证码，切换后立即生效"
+                        />
+                    </div>
+                    <div className="admin-access-registration-policy">
+                        <span className="admin-access-policy-icon">
+                            <LockKeyhole className="size-5" aria-hidden="true" />
+                        </span>
+                        <div className="admin-access-policy-copy">
+                            <div className="flex flex-wrap items-center gap-2">
+                                <strong>邮箱验证码登录</strong>
+                                <AdminStatusBadge label="切换即保存" tone="info" />
+                            </div>
+                            <p>开启后登录页会多出「邮箱验证码」登录方式：输入邮箱、收 6 位码即可登录，无需密码。需要先配置并启用邮件服务；关闭则只保留邮箱 + 密码登录。</p>
+                        </div>
+                        <Switch
+                            checked={Boolean(policy?.emailLogin)}
+                            loading={savingEmailLogin}
+                            disabled={loading || refreshing || savingEmailLogin || !policy}
+                            onChange={(value) => void changeEmailLogin(value)}
+                            aria-label="邮箱验证码登录，切换后立即生效"
                         />
                     </div>
                 </SettingsSectionCard>
