@@ -13,7 +13,7 @@ import { YoruWidget } from "@/components/layout/yoru-widget";
 import { modeFromPath, useWorkspaceModeStore } from "@/stores/use-workspace-mode-store";
 import { TeamInvitationCenter } from "@/components/layout/team-invitation-center";
 import { TeamSpaceDirectoryHost } from "@/components/layout/team-space-directory";
-import { getFeatureAvailability } from "@/services/api/auth";
+import { getFeatureAvailability, getPublicFeatureAvailability } from "@/services/api/auth";
 import "@/styles/workspace-product.css";
 import "@/styles/workspace-menus.css";
 import "@/styles/ecommerce-control-shapes.css";
@@ -36,17 +36,23 @@ export default function UserLayout({ children }: { children: ReactNode }) {
     const userId = useUserStore((state) => state.user?.id);
     const teamsEnabled = useUserStore((state) => state.features.teamsEnabled);
     useEffect(() => {
-        if (!userId || adminWorkspace) return;
+        if (adminWorkspace) return;
         let active = true;
-        const refresh = async () => {
-            if (document.visibilityState !== "visible") return;
+        const load = async (initial: boolean) => {
+            if (!initial && document.visibilityState !== "visible") return;
             try {
-                const { features } = await getFeatureAvailability();
-                if (active && useUserStore.getState().user?.id === userId) useUserStore.getState().setFeatures(features);
+                // 游客拿不到需要登录的 /features，改用公开开关接口，
+                // 否则侧栏会回落到前端默认值（电商 / 生图 / 视频被误判为关闭）。
+                const { features } = userId ? await getFeatureAvailability() : await getPublicFeatureAvailability();
+                if (!active) return;
+                if (userId && useUserStore.getState().user?.id !== userId) return;
+                useUserStore.getState().setFeatures(features);
             } catch (error) {
                 if (active) console.warn("工作台功能开放状态刷新失败", error);
             }
         };
+        void load(true);
+        const refresh = () => void load(false);
         document.addEventListener("visibilitychange", refresh);
         return () => {
             active = false;

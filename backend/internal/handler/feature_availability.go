@@ -19,6 +19,18 @@ func RegisterFeatureAvailabilityRoutes(r *gin.RouterGroup, svc *service.Service)
 		ok(c, gin.H{"welcomeEnabled": setting.WelcomeEnabled})
 	})
 
+	// 公开开关：游客未登录也能拿到展示用开关，避免侧栏回落到前端默认值。
+	// 只返回开关本身，不含 Configured / UpdatedBy / UpdatedAt 等管理信息。
+	r.GET("/public/features", func(c *gin.Context) {
+		c.Header("Cache-Control", "no-store")
+		setting, err := svc.FeatureAvailability()
+		if err != nil {
+			failService(c, err)
+			return
+		}
+		ok(c, gin.H{"features": setting.FeatureAvailability})
+	})
+
 	r.GET("/features", func(c *gin.Context) {
 		if _, err := currentUser(c, svc); err != nil {
 			failService(c, err)

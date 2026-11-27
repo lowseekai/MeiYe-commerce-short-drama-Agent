@@ -579,6 +579,11 @@ export function getFeatureAvailability() {
     return http.get<{ features: FeatureAvailability }>("/features");
 }
 
+// 游客（未登录）用：公开开关接口，返回内容与 /features 的 features 字段一致。
+export function getPublicFeatureAvailability() {
+    return http.get<{ features: FeatureAvailability }>("/public/features");
+}
+
 export function getAdminFeatureAvailability() {
     return http.get<{ features: FeatureAvailability }>("/admin/settings/features");
 }
